@@ -70,3 +70,23 @@ app.put ('/api/books/:id', (req, res) => {
 
     res.json(book);
 });
+
+
+
+//Eliminar un libro
+app.delete('/api/books/:id', (req,res) => {
+    const id = parseInt(req.params.id);
+
+    const index = books.findIndex(b => b.id === id);
+
+    if(index === 1){
+        return res.status(404).json({
+            message: 'No encontrado'
+        });
+    }
+    books.splice(index, 1);
+
+    res.json({
+        message: 'Eliminado'
+    });
+})
